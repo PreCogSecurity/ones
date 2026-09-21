@@ -263,5 +263,5 @@ echo file_get_contents(INSTALL_PATH.'/Complete.md');
 echo "\nYour login info: \n";
 echo "Company sign id: 10000\n";
 echo "Login name: ". $user_info['login']."\n";
-echo "Password: ". $user_info['password']."\n\n";
+echo "Password: [SECURELY GENERATED AND SAVED TO DATABASE - PLEASE RESET VIA ADMIN PANEL IF NEEDED]\n\n";
 exit;

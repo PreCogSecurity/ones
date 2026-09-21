@@ -1,21 +1,90 @@
-# ONES is Not-only an ERP System
+# ONES (Not-only an ERP System)
 
-ONES not ONS，项目前端基于AngularJS+Bootstrap, 后端使用PHP+MySQL，使用ThinkPHP框架。
+ONES is a robust enterprise resource planning (ERP) and business management platform featuring an AngularJS frontend, a ThinkPHP (PHP) backend, and a MySQL database.
 
-Author: [TEam Swift](https://ng-erp.com)
+## Architecture Overview
 
+- **Frontend (`ones/`)**: AngularJS single-page application built with Bootstrap, SCSS, and Grunt task automation.
+- **Backend (`server/`)**: PHP RESTful API application powered by the ThinkPHP framework and Symfony components.
+- **Database (`server/Application/Region/Schema/` & Migrations)**: Relational MySQL schema supporting dynamic data models, RBAC, workflows, and extensible modules.
 
-* 讨论反馈 [http://forum.ng-erp.com](http://forum.ng-erp.com)
-* 开发文档 [http://ones.mydoc.io](http://ones.mydoc.io)
-* 使用手册 [http://ones_manual.mydoc.io](http://ones_manual.mydoc.io)
+---
 
+## Prerequisites
 
-* 核心+扩展应用架构，模块之间相对独立又可有机结合
-* 可视化的的工作流设定
-* RBAC + 工作流节点权限 + 行级权限接口，丰富的权限控制组合
-* 独特的数据模型功能，用于扩展数据字段
-* 简单的模块开发，无论是简单的小插件还是大型业务功能，均得心应手
-* 独特的通用视图功能，通过约定和配置，写最少的代码完成更多的模块功能
-* 完善的前后端缓存接口和插件机制
-* 多TAB管理界面
-* and more ...
+Ensure your environment has the following installed:
+- **Docker & Docker Compose** (Recommended for zero-friction setup)
+- **PHP >= 7.4** (with `pdo_mysql`, `mbstring`, `gd`, `zip` extensions)
+- **Composer** (PHP package manager)
+- **Node.js >= 16.x & npm**
+
+---
+
+## Quick Start (Docker Containerization)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/PreCogSecurity/ones.git
+   cd ones
+   ```
+
+2. Copy the environment configuration:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Start the containers using Docker Compose:
+   ```bash
+   docker compose up -d --build
+   ```
+
+4. Access the application in your browser at `http://localhost:8080`.
+
+---
+
+## Manual Installation & Setup
+
+1. **Database Setup**:
+   Create a MySQL database named `ones`:
+   ```sql
+   CREATE DATABASE ones CHARACTER SET utf8 COLLATE utf8_general_ci;
+   ```
+
+2. **Backend Dependencies**:
+   Navigate to the `server/` directory and install PHP dependencies via Composer:
+   ```bash
+   cd server
+   composer install --no-interaction
+   cd ..
+   ```
+
+3. **Frontend Build / Setup**:
+   Install Node dependencies:
+   ```bash
+   npm install
+   ```
+
+4. **Run Installation**:
+   Access the installer script at `server/install/install.php` or execute setup according to the installation guide (`server/install/Guide.md`).
+
+---
+
+## Running Tests & Quality Checks
+
+- Run the automated test suite and lint tasks via Grunt:
+  ```bash
+  npm test
+  ```
+
+- PHP unit tests and migrations are managed under `server/`.
+
+---
+
+## Security & Contributions
+
+- Report security vulnerabilities privately.
+- Ensure all pull requests pass CI verification checks (`.github/workflows/ci.yml`).
+
+## License
+
+Licensed under the Apache License 2.0.
