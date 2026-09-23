@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: ones_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ones
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ones-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    container_name: ones_web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=ones
+      - DB_USER=root
+      - DB_PASS=root
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - ones-net
+
+volumes:
+  mysql_data:
+
+networks:
+  ones-net:
+    driver: bridge
